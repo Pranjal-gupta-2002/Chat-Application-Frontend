@@ -13,7 +13,7 @@ const ChatList = ({
       count: 0,
     },
   ],
-  handleDeleteChat,
+  handleDeleteChat ,
 }) => {
     console.log(chatId)
     console.log(newMessagesAlert);
@@ -39,7 +39,7 @@ const ChatList = ({
             key={_id}
             groupChat={groupChat}
             sameSender={chatId === _id}
-            handleDeleteChat={handleDeleteChat}
+            handleDeleteChat ={handleDeleteChat }
           />
         );
       })}

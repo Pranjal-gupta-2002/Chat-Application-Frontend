@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { StyledLink } from "../Styles/StyledComponents";
+import AvatarCard from "./AvatarCard";
 
 const ChatItem = ({
   avatar = [],
@@ -11,11 +12,11 @@ const ChatItem = ({
   isOnline,
   newMessageAlert,
   index = 0,
-  handleDeleteChatOpen,
+  handleDeleteChat ,
 }) => {
     console.log(newMessageAlert)
   return (
-    <StyledLink to={`/chat/${_id}`} onContextMenu={()=> handleDeleteChatOpen(e,_id,groupChat)} sx={{
+    <StyledLink to={`/chat/${_id}`} onContextMenu={(e)=> handleDeleteChat(e,_id,groupChat)} sx={{
         padding:"0"
     }}>
       <div
@@ -29,7 +30,7 @@ const ChatItem = ({
           color: sameSender ? "white" : "unset",
         }}
       >
-        {/* AVATAR Card */}
+        <AvatarCard avatar={avatar}/>
 
         <Stack>
             <Typography variant="h6">{name}</Typography>
