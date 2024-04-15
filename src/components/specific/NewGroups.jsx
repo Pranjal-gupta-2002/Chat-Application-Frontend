@@ -2,27 +2,67 @@ import {
   Dialog,
   DialogTitle,
   Stack,
-  Typography
+  Typography,
+  TextField,
+  Button,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { sampleUsers } from "../../Constants/SampleData";
+import UserItem from "../shared/UserItem";
+import { useInputValidation } from "6pp";
 
 const NewGroups = () => {
+  const [members, setMembers] = useState(sampleUsers);
+  const [selectedMembers, setSelectedMembers] = useState([]);
+  const groupName = useInputValidation("");
+  const selectMembersHandler = (id) => {
+    setSelectedMembers((prev) =>
+      prev.includes(id)
+        ? prev.filter((currentElement) => currentElement !== id)
+        : [...prev, id]
+    );
+  };
+  console.log(selectedMembers);
+  const submitHandler = () => {};
+  const closeHandler = () => {};
   return (
     <Dialog open>
-      <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
-        <DialogTitle>New Group</DialogTitle>
-        {sampleNotification.length > 0 ? (
-          sampleNotification.map((item, index) => (
-            <NotificationItem
-              key={index}
-              sender={item.sender}
-              _id={item._id}
-              handler={friendRequestHandler}
+      <Stack p={{ xs: "1rem", sm: "3rem" }} width={"22rem"} spacing={"2rem"}>
+        <DialogTitle textAlign={"center"} variant="h4">
+          New Group
+        </DialogTitle>
+        <TextField
+          label="Group Name"
+          value={groupName.value}
+          onChange={groupName.changeHandler}
+          variant="outlined"
+          fullWidth
+          sx={{ mb: "1rem" }}
+        />
+        <Typography variant="body1">Members</Typography>
+        <Stack>
+          {members.map((user) => (
+            <UserItem
+              user={user}
+              key={user._id}
+              handler={selectMembersHandler}
+              isAdded={selectedMembers.includes(user._id)}
             />
-          ))
-        ) : (
-          <Typography textAlign={"center"}>0 Notifications</Typography>
-        )}
+          ))}
+        </Stack>
+        <Stack direction={"row"} justifyContent={"space-between"}>
+          <Button onClick={submitHandler} variant="contained" size={"large"}>
+            Create
+          </Button>
+          <Button
+            onClick={() => {}}
+            variant="outlined"
+            color="error"
+            size={"large"}
+          >
+            Cancel
+          </Button>
+        </Stack>
       </Stack>
     </Dialog>
   );

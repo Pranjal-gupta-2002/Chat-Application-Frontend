@@ -22,7 +22,7 @@ const [users,setUsers] = useState(sampleUsers)
   const search = useInputValidation("");
   return (
     <Dialog open>
-      <Stack direction={"column"} p={"2rem"} width={"25rem"}>
+      <Stack direction={"column"} p={"2rem"} width={"23rem"}>
         <DialogTitle textAlign={"center"}>Find People</DialogTitle>
         <TextField
           label=""
